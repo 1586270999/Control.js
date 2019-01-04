@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本输入框</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link type="text/css" rel="stylesheet" href="../../src/layui/css/layui.css" />
+    <script type="text/javascript" src="../../src/lib/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="../../src/lib/layer.min.js"></script>
+    <script type="text/javascript" src="../../src/common/common.js"></script>
+    <script type="text/javascript" src="../../src/component/ControlsBase.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/FormControlsBase.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/TextBox.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/TextArea.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/CheckBox.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/Combobox.js"></script>
+    <script type="text/javascript" src="../../json/combox.js"></script>
+    <script type="text/javascript" src="../../src/lib/laydate.min.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/DateField.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/CheckBoxGroup.js"></script>
+    <script type="text/javascript" src="../../src/lib/UEditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../../src/lib/UEditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/HtmlEditor.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/NumericText.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/RadioGroup.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/UnitField.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/Label.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/ProgressBar.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/Button.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/ButtonGroup.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/SplitButton.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/FileUpload.js"></script>
+    <script type="text/javascript" src="../../src/lib/uploader.js"></script>
+    <script type="text/javascript" src="../../json/dynacombox.js"></script>
+    <script type="text/javascript" src="../../src/lib/LayTables/laypage.js"></script>
+    <script type="text/javascript" src="../../src/lib/LayTables/laytpl.js"></script>
+    <script type="text/javascript" src="../../src/lib/LayTables/table.js"></script>
+    <script type="text/javascript" src="../../src/component/forms/DynamicCombobox.js"></script>
+</head>
+<body>
+    <div class="layui-form" style="margin-top:20px;">
+        <div id="pl_control" class="layui-form-item" style="max-width:640px;"></div>
+    </div>
+</body>
+</html>
+<script>
+    var c_FFuncID_RowData = [[
+        { field: 'FFuncID', title: '编号', align: 'left', width: '100', },
+        { field: 'FName', title: '功能名称', width: '140' },
+        { field: 'FName', hide: true }
+    ]];
+
+
+    $(function () {
+        var controls = {
+            c_Name:{
+                id: 'c_Name',
+                labeltext: '姓名',
+                required: true,
+                value: '张学山',
+                readonly: true,
+                clstype: 'JointTextField'
+            },
+            c_Pwd:{
+                id: 'c_Pwd',
+                labeltext: '密码',
+                required: true,
+                inputmode: 'password',
+                clstype: 'JointTextField'
+            },
+            c_UserName:{
+                id: 'c_UserName',
+                labeltext: '用户名',
+                required: true,
+                text: '张洢宁',
+                clstype: 'JointTextField'
+            },
+            c_Pwd2:{
+                id: 'c_Pwd2',
+                labeltext: '密码',
+                inputmode: 'password',
+                clstype: 'JointTextField'
+            },
+            c_Area1:{
+                id: 'c_Area1',
+                labeltext: '多行文本1',
+                required: true,
+                value: '张学山',
+                readonly: true,
+                height: 60,
+                clstype: 'JointTextArea'
+            },
+            c_Area2:{
+                id: 'c_Area2',
+                labeltext: '多行文本2',
+                required: true,
+                text: '张学山123',
+                readonly: false,
+                height: 100,
+                //width
+                clstype: 'JointTextArea'
+            },
+            c_Check1:{
+                id: 'c_Check1',
+                labeltext: '复选框1',
+                required: true,
+                skin:'switch',
+                showtext: '张三|李四',
+                clstype: 'JointCheckBox'
+            },
+            c_Check2:{
+                id: 'c_Check2',
+                labeltext: '复选框2',
+                skin:'switch',
+                showtext: '张三|李四',
+                readonly: true,
+                clstype: 'JointCheckBox',
+                checked: true
+            },
+            c_Check3:{
+                id: 'c_Check3',
+                labeltext: '复选框3',
+                required: true,
+                showtext: '学习',
+                clstype: 'JointCheckBox'
+            },
+            c_Check4:{
+                id: 'c_Check4',
+                labeltext: '复选框4',
+                required: true,
+                showtext: '写作',
+                viewmode: true,
+                clstype: 'JointCheckBox',
+                checked: true
+            },
+            c_Combobox1:{
+                id: 'c_Combobox1',
+                labeltext: '下拉框',
+                required: true,
+                jsds:[
+                    {Value: 1,Text: '汉族'},
+                    {Value:2, Text: '满族'},
+                    {Value:3, Text: '回族'}
+                ],
+                clstype: 'JointCombobox'
+            },
+            c_Combobox2: {
+                id: 'c_Combobox2',
+                labeltext: '下拉框',
+                required: false,
+                readonly: true,
+                value: 2,
+                text: '张三',
+                jsds: [
+                    {Value: 1, Text: '张三'},
+                    {Value: 2, Text: '李四'},
+                    {Value: 3, Text: '王五'}
+                ],
+                clstype: 'JointCombobox'
+            },
+            c_Combobox3:{
+                id: 'c_Combobox3',
+                labeltext: '下拉框',
+                required: true,
+                jsds:[],
+                ajaxurl: '../../json/Combobox.txt',
+                asynload: true,
+                asynonce: true,
+                clstype: 'JointCombobox'
+            },
+            c_Date1:{
+                id: 'c_Date1',
+                labeltext: '日期选择',
+                readonly: true,
+                value: '2018-11-01',
+                clstype: 'JointDateField',
+                obj: {
+                    elem: '#c_Date1'
+                }
+            },
+            c_Date2:{
+                id: 'c_Date2',
+                labeltext: '时间选择',
+                required: true,
+                clstype: 'JointDateField',
+                obj: {
+                    elem: '#c_Date2',
+                    type: 'time'
+                }
+            },
+            c_Date3:{
+                id: 'c_Date3',
+                labeltext: '日期时间',
+                required: false,
+                clstype: 'JointDateField',
+                obj: {
+                    elem: '#c_Date3',
+                    type: 'datetime'
+                }
+            },
+            c_CheckGroup1:{
+                id: 'c_CheckGroup1',
+                labeltext: '复选框组1',
+                readonly: true,
+                clstype: 'JointCheckBoxGroup',
+                jsds:[
+                    {Value: 1, Text: '汉族'},
+                    {Value: 2, Text: '满族'},
+                    {Value: 3, Text: '回族'},
+                    {Value: 4, Text: '金族'},
+                    {Value: 5, Text: '木族'},
+                    {Value: 6, Text: '土族'}
+                ],
+                value: '1,3,5',
+                width: 690
+            },
+            c_CheckGroup2:{
+                id: 'c_CheckGroup2',
+                labeltext: '复选框组2',
+                clstype: 'JointCheckBoxGroup',
+                jsds:[
+                    {Value: 1, Text: '汉族'},
+                    {Value: 2, Text: '满族'},
+                    {Value: 3, Text: '回族'},
+                    {Value: 4, Text: '金族'},
+                    {Value: 5, Text: '木族'},
+                    {Value: 6, Text: '土族'}
+                ],
+                skin: 'switch',
+                value: '2,4,6',
+                width: 690
+            },
+            c_HtmlEditor1:{
+                id: 'c_HtmlEditor1',
+                labeltext: 'HTML输入框',
+                labelwidth: 110,
+                clstype: 'JointHtmlEditor',
+                width: '700',
+                height: '200'
+            },
+            c_Number1:{
+                id: 'c_Number1',
+                labeltext: '数字录入',
+                required: true,
+                clstype: 'JointNumericText'
+            },
+            c_Number2:{
+                id: 'c_Number2',
+                labeltext: '数字录入',
+                clstype: 'JointNumericText',
+                readonly: true
+            },
+            c_RadioGroup1:{
+                id: 'c_RadioGroup1',
+                labeltext: '单选框组1',
+                readonly: true,
+                clstype: 'JointRadioGroup',
+                jsds:[
+                    {Value: 1, Text: '汉族'},
+                    {Value: 2, Text: '满族'},
+                    {Value: 3, Text: '回族'},
+                    {Value: 4, Text: '金族'}
+                ],
+                value: '3',
+                width: 690
+            },
+            c_RadioGroup2:{
+                id: 'c_RadioGroup2',
+                labeltext: '单选框组2',
+                clstype: 'JointRadioGroup',
+                jsds:[
+                    {Value: 1, Text: '汉族'},
+                    {Value: 2, Text: '满族'},
+                    {Value: 3, Text: '回族'},
+                    {Value: 4, Text: '金族'}
+                ],
+                skin: 'switch',
+                width: 690
+            },
+            c_Unit1:{
+                id: 'c_Unit1',
+                labeltext: '单位录入',
+                required: true,
+                clstype: 'JointUnitField',
+                unittext: '元'
+            },
+            c_Unit2:{
+                id: 'c_Unit2',
+                labeltext: '单位录入',
+                clstype: 'JointUnitField',
+                readonly: true,
+                unittext: '人',
+                numinput: true
+            },
+            c_Label1:{
+                id: 'c_Label',
+                text: '百度一下',
+                onclick: 'alert();',
+                clstype: 'JointLabel',
+                linemode:'underline',
+                width:100,
+                color: 'red'
+            },
+            c_Progress1:{
+                id: 'c_Progress1',
+                clstype: 'JointProgressBar',
+                percent: '30%'
+            },
+            c_Btn1:{
+                id:'c_Btn1',
+                text:'按钮',
+                onclick: 'alert(1);',
+                clstype: 'JointButton',
+                skins: 'primary',
+                width: 80
+            },
+            c_Btn2:{
+                id: 'c_Btn2',
+                text: '超链接',
+                type: 1,
+                posturl: 'http://www.badu.com/',
+                clstype: 'JointButton'
+            },
+            c_BtnGroup1:{
+                id: 'c_BtnGroup1',
+                clstype: 'JointButtonGroup',
+                size: 'sm',
+                jsds: [
+                    {Name: '1', Text:'新建', Icon:'add-1', OnClick:'alert();'},
+                    {Name: '2', Text:'修改', Icon:'edit', OnClick:'alert();'},
+                    {Name: '3', Text:'删除', Icon:'delete', OnClick:'alert();'},
+                    {Name: '4', Text:'查看', Icon:'form'},
+                    {Name: '5', Text:'刷新', Icon:'refresh'},
+                    {Name: '6', Text:'启用'},
+                    {Name: '7', Text:'禁用'}
+                ]
+            },
+            c_BtnGroup2:{
+                id: 'c_BtnGroup2',
+                clstype: 'JointSplitButton',
+                bgcolor: 'green',
+                jsds: [
+                    {Name: '1', Text:'新建', Icon:'add-1', OnClick:'alert();'},
+                    {Name: '2', Text:'修改', Icon:'edit', OnClick:'alert();'},
+                    {Name: '3', Text:'删除', Icon:'delete', OnClick:'alert();'},
+                    {Name: '4', Text:'查看', Icon:'form'},
+                    {Name: '5', Text:'刷新', Icon:'refresh'},
+                    {Name: '6', Text:'启用'},
+                    {Name: '7', Text:'禁用'}
+                ]
+            },
+            c_FileUpload:{
+                id: 'c_FileUpload1',
+                clstype: 'JointFileUpload',
+                obj: {
+                    elem: '#c_FileUpload1_Btn1',
+                    size: 300
+                }
+            },
+            c_FFuncID:{
+                id: 'c_FFuncID',
+                clstype: 'JointDynaminCombox',
+                labeltext: '动态下拉',
+                rowdata:[[
+                    { field: 'FFuncID', title: '编号', align: 'left', width: '100', },
+                    { field: 'FName', title: '功能名称', width: '140' },
+                    { field: 'FName', hide: true }
+                ]]
+            }
+        };
+
+
+        var html = '';
+        for(var c in controls){
+            html += ControlsBase.GetRenderHtml(controls[c]);
+        }
+        $("#pl_control").html(html);
+    });
+</script>
